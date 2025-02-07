@@ -1,0 +1,52 @@
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <h2>Lista de Veículos</h2>
+  <button (click)="openModal()" style="padding: 5px 10px;">Inserir +</button>
+</div>
+
+<div class="modal" *ngIf="showModal">
+  <div class="modal-content">
+    <span class="close-button" (click)="closeModal()">&times;</span>
+    <h3>{{ isEditing ? 'Editar Veículo' : 'Novo Veículo' }}</h3>
+
+    <form (ngSubmit)="submitForm()" class="vehicle-form">
+      <input type="text" placeholder="Placa" [(ngModel)]="vehicleForm.placa" name="placa" required />
+      <input type="text" placeholder="Chassi" [(ngModel)]="vehicleForm.chassi" name="chassi" required />
+      <input type="text" placeholder="Renavam" [(ngModel)]="vehicleForm.renavam" name="renavam" required />
+      <input type="text" placeholder="Modelo" [(ngModel)]="vehicleForm.modelo" name="modelo" required />
+      <input type="text" placeholder="Marca" [(ngModel)]="vehicleForm.marca" name="marca" required />
+      <input type="number" placeholder="Ano" [(ngModel)]="vehicleForm.ano" name="ano" required />
+
+      <button type="submit">{{ isEditing ? 'Atualizar' : 'Criar' }}</button>
+      <button type="button" (click)="resetForm()">Cancelar</button>
+    </form>
+  </div>
+</div>
+
+<h3>Veículos cadastrados</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Placa</th>
+      <th>Chassi</th>
+      <th>Renavam</th>
+      <th>Modelo</th>
+      <th>Marca</th>
+      <th>Ano</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let vehicle of vehicles">
+      <td>{{ vehicle.placa }}</td>
+      <td>{{ vehicle.chassi }}</td>
+      <td>{{ vehicle.renavam }}</td>
+      <td>{{ vehicle.modelo }}</td>
+      <td>{{ vehicle.marca }}</td>
+      <td>{{ vehicle.ano }}</td>
+      <td>
+        <button (click)="editVehicle(vehicle)">Editar</button>
+        <button (click)="deleteVehicle(vehicle.id)">Deletar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,28 @@
+{
+  "name": "back-info-sistemas",
+  "version": "1.0.0",
+  "description": "Projeto de backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "clear && node server.js",
+    "db:create": "docker run -d --name dynamodb-local -p 8000:8000 amazon/dynamodb-local",
+    "db:stop": "docker stop dynamodb-local",
+    "db:start": "docker start dynamodb-local",
+    "db:createTables": "clear && node data\\createTable.js",
+    "db:listTables": "aws dynamodb list-tables --endpoint-url http://localhost:8000",
+    "test": "clear && mocha"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "dotenv-parse-variables": "^2.0.0",
+    "express": "^4.21.2",
+    "fs-extra": "^11.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.5.0",
+    "mocha": "^10.8.2"
+  }
+}
